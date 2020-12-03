@@ -326,7 +326,7 @@ map = map.split("\n");
 
 /*
 Most of this is the same as in the previous task.
-https://gist.github.com/emmio-micke/95d6a6aaf9f8868194cb952f372e2e99
+https://github.com/emmio-micke/aoc_2020/blob/main/03-a.js
 
 We wrapped the solution in a function that takes parameters for the no of steps in both
 directions and added a filter function.
