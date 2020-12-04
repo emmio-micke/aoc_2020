@@ -65,7 +65,7 @@ let passports = get_data()
         RegExp(/^\d{9}$/).test(passport.get('pid'))
     );
 
-console.log(passports.length); // 256
+console.log(passports.length); // 198
 
 function get_data() {
     return `eyr:2028 iyr:2016 byr:1995 ecl:oth

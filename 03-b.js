@@ -1,4 +1,41 @@
-let map = `.#..#.....#....##..............
+let map = get_data().split("\n");
+/*
+Most of this is the same as in the previous task.
+https://github.com/emmio-micke/aoc_2020/blob/main/03-a.js
+
+We wrapped the solution in a function that takes parameters for the no of steps in both
+directions and added a filter function.
+*/
+
+function trees(map, steps_x, steps_y) {
+    return map
+        // This filter removes every steps_y row.
+        .filter((row, index) => index % steps_y === 0)
+        .map(row => row.repeat(Math.ceil((map.length / row.length) * steps_x)))
+        .map((row, index) => row[index * steps_x])
+        .filter(char => '#' === char)
+        .length;
+}
+
+// Setup the different slopes.
+let slopes = [
+    [1, 1],
+    [3, 1],
+    [5, 1],
+    [7, 1],
+    [1, 2]
+];
+
+let result = slopes
+    // Get the number of trees per slope.
+    .map((slope) => trees(map, slope[0], slope[1]))
+    // Calculate the product.
+    .reduce((acc, current_value) => acc * current_value, 1);
+
+console.log(result); // 5522401584
+
+function get_data() {
+    return `.#..#.....#....##..............
 ...#.#...#...#.#..........#....
 #...###...#.#.....#.##.#.#...#.
 #.....#.#...##....#...#...#....
@@ -321,40 +358,4 @@ let map = `.#..#.....#....##..............
 .#..#.....##.....#...#.......##
 ..#.##........##...........#.#.
 ....##.#..###.#.........#...##.`;
-
-map = map.split("\n");
-
-/*
-Most of this is the same as in the previous task.
-https://github.com/emmio-micke/aoc_2020/blob/main/03-a.js
-
-We wrapped the solution in a function that takes parameters for the no of steps in both
-directions and added a filter function.
-*/
-
-function trees(map, steps_x, steps_y) {
-    return map
-        // This filter removes every steps_y row.
-        .filter((row, index) => index % steps_y === 0)
-        .map(row => row.repeat(Math.ceil((map.length / row.length) * steps_x)))
-        .map((row, index) => row[index * steps_x])
-        .filter(char => '#' === char)
-        .length;
 }
-
-// Setup the different slopes.
-let slopes = [
-    [1, 1],
-    [3, 1],
-    [5, 1],
-    [7, 1],
-    [1, 2]
-];
-
-let result = slopes
-    // Get the number of trees per slope.
-    .map((slope) => trees(map, slope[0], slope[1]))
-    // Calculate the product.
-    .reduce((acc, current_value) => acc * current_value, 1);
-
-console.log(result); // 5522401584
