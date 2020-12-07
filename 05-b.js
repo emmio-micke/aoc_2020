@@ -1,3 +1,5 @@
+let seats = [];
+
 let boarding_passes = get_data()
     .split("\n")
     .map(value => [
@@ -27,11 +29,28 @@ let boarding_passes = get_data()
                 ]
         }, [0, 7])[0];
 
+        if (!seats[row_new]) {
+            seats[row_new] = Array(8).fill(0);
+        }
+
+        seats[row_new][col_new] = row_new * 8 + col_new;
+
         return row_new * 8 + col_new;
     });
 
-//console.log(boarding_passes);
-console.log(Math.max(...boarding_passes)); // 896
+
+seats = seats.filter(row => row.includes(0))[1];
+
+let seat_id = seats[0] + 1;
+for (let i = 0; i < seats.length; i++) {
+    if (seats[i] == 0) {
+        seat_id = seats[i - 1] + 1;
+        break;
+    }
+}
+
+console.log(seat_id); // 659
+
 
 
 
